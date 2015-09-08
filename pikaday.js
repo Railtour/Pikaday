@@ -945,6 +945,16 @@
                 top = top - height - field.offsetHeight;
             }
 
+            //** CUSTOM CODE BEGIN
+            //** check if calendar is position absolute in a container div,
+            //** if this is the case => position it relative to this container
+            var container = this.el.parentElement;
+            if (container !== document.body){
+                left -= container.offsetLeft;
+                top -=  container.offsetTop;
+            }
+            //** CUSTOM CODE END
+
             this.el.style.left = left + 'px';
             this.el.style.top = top + 'px';
         },
