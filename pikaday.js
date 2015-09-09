@@ -240,6 +240,9 @@
         // Specify a DOM element to render the calendar in
         container: undefined,
 
+        // Specify a parent DOM element where the calendar is shown if container is not defined
+        parentElement: document.body,
+
         // internationalization
         i18n: {
             previousMonth : 'Previous Month',
@@ -551,7 +554,7 @@
             if (opts.container) {
                 opts.container.appendChild(self.el);
             } else if (opts.bound) {
-                document.body.appendChild(self.el);
+                opts.parentElement.appendChild(self.el);
             } else {
                 opts.field.parentNode.insertBefore(self.el, opts.field.nextSibling);
             }
@@ -945,15 +948,8 @@
                 top = top - height - field.offsetHeight;
             }
 
-            //** CUSTOM CODE BEGIN
-            //** check if calendar is position absolute in a container div,
-            //** if this is the case => position it relative to this container
-            var container = this.el.parentElement;
-            if (container !== document.body){
-                left -= container.offsetLeft;
-                top -=  container.offsetTop;
-            }
-            //** CUSTOM CODE END
+            left -= this._o.parentElement.offsetLeft;
+            top -= this._o.parentElement.offsetTop;
 
             this.el.style.left = left + 'px';
             this.el.style.top = top + 'px';
