@@ -950,8 +950,9 @@
                 top = top - height - field.offsetHeight;
             }
 
-            left -= this._o.parentElement.offsetLeft;
-            top -= this._o.parentElement.offsetTop;
+            var parentOffset = $(this._o.parentElement).offset();
+            left -= parentOffset.left;
+            top -= parentOffset.top;
 
             this.el.style.left = left + 'px';
             this.el.style.top = top + 'px';
