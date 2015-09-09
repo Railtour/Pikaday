@@ -555,7 +555,7 @@
         if (opts.field) {
             if (opts.container) {
                 opts.container.appendChild(self.el);
-            } else if (opts.bound) {
+            } else if (opts.bound && opts.parentElement) {
                 opts.parentElement.appendChild(self.el);
             } else {
                 opts.field.parentNode.insertBefore(self.el, opts.field.nextSibling);
