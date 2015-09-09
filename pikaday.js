@@ -1,6 +1,8 @@
 /*!
  * Pikaday
  *
+ * Forked version of Pikaday | https://github.com/Railtour/Pikaday
+ * Original version: https://github.com/dbushell/Pikaday
  * Copyright © 2014 David Bushell | BSD & MIT license | https://github.com/dbushell/Pikaday
  */
 
