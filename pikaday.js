@@ -403,6 +403,14 @@
         return '<table cellpadding="0" cellspacing="0" class="pika-table">' + renderHead(opts) + renderBody(data) + '</table>';
     },
 
+    getStyle = function (el, prop) {
+        if (getComputedStyle !== 'undefined') {
+            return getComputedStyle(el, null).getPropertyValue(prop);
+        } else {
+            return el.currentStyle[prop];
+        }
+    },
+
 
     /**
      * Pikaday constructor
@@ -557,7 +565,8 @@
             if (opts.container) {
                 opts.container.appendChild(self.el);
             } else if (opts.bound && opts.boundingBox) {
-                if (opts.boundingBox.style.position != 'relative') opts.boundingBox.style.position = 'relative';
+                if (!getStyle(opts.boundingBox,'position'))
+                  opts.boundingBox.style.position = 'relative';
                 opts.boundingBox.appendChild(self.el);
             } else {
                 opts.field.parentNode.insertBefore(self.el, opts.field.nextSibling);
