@@ -239,11 +239,12 @@
         // only used for the first display or when a selected date is not visible
         mainCalendar: 'left',
 
-        // Specify a DOM element to render the calendar in
+        // Specify a DOM element to render the calendar in (relative position)
         container: undefined,
 
-        // Specify a parent DOM element where the calendar is shown if container is not defined
-        parentElement: document.body,
+        // Specify a parent DOM element that will act as a boundingbox for the calendar (absolute position)
+        // i.e. the calendar will not exceeds the left and right borders of this box
+        boundingBox: document.body,
 
         // internationalization
         i18n: {
@@ -555,8 +556,9 @@
         if (opts.field) {
             if (opts.container) {
                 opts.container.appendChild(self.el);
-            } else if (opts.bound && opts.parentElement) {
-                opts.parentElement.appendChild(self.el);
+            } else if (opts.bound && opts.boundingBox) {
+                if (opts.boundingBox.style.position != 'relative') opts.boundingBox.style.position = 'relative';
+                opts.boundingBox.appendChild(self.el);
             } else {
                 opts.field.parentNode.insertBefore(self.el, opts.field.nextSibling);
             }
@@ -950,7 +952,7 @@
                 top = top - height - field.offsetHeight;
             }
 
-            var parentOffset = $(this._o.parentElement).offset();
+            var parentOffset = $(this._o.boundingBox).offset();
             left -= parentOffset.left;
             top -= parentOffset.top;
 
